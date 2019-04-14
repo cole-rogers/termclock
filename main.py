@@ -19,7 +19,12 @@ def drawHand(screen, length, unit):
     hype = 0
     if(unit == "second"):
         hype = dt.now().second
-    screen.print_at(u'☎', 0)
+    elif (unit == "minute"):
+        hype = dt.now().minute
+    else:
+        hype = dt.now().hour*12/60
+    
+
 def defineParams(screen):
    dimTup = screen.dimensions
    y_cen = round(dimTup[0]/2)
@@ -34,6 +39,7 @@ def analogScreen(screen):
     while (screen.has_resized() == False):
         dimData = defineParams(screen)
         drawCircle(screen,dimData[4], dimData[2], dimData[3])
+        screen.print_at(u'◉',dimData[2],dimData[3])
         screen.refresh()
         sleep(0.50)
 
