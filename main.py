@@ -16,22 +16,21 @@ def drawCircle(screen, max_circle, x_cen, y_cen):
           #  return
 
 def drawHand(screen, rad, x_cen, y_cen, unit, chara):
-    ang = 0
     if(unit == "second"):
-        ang= -dt.now().second/60*360
-        angOld = (-dt.now().second+1)/60*360
+        ang =  math.radians(dt.now().second*6-90)
+        angOld = math.radians((dt.now().second-1)*6-90)
     elif (unit == "minute"):
-        ang = -dt.now().minute/60*360
-        angOld = (-dt.now().minute+1)/60*360
+        ang = math.radians(dt.now().minute*6-90)
+        angOld = math.radians((dt.now().minute-1)*6-90)
     else:
-        ang = -dt.now().hour/24*360
-        angOld = (-dt.now().hour+1)/24*360
-    x_pos = x_cen + rad*math.cos(ang)
-    y_pos = y_cen + rad*math.sin(ang)
+        ang = math.radians((dt.now().hour/24*360-90))
+        angOld = math.radians((dt.now().hour-1)/24*360-90)
+    x_pos = round(x_cen + rad*math.cos(ang)*2)
+    y_pos = round(y_cen +rad*math.sin(ang))
     screen.move(x_cen,y_cen)
     screen.draw(x_pos, y_pos, chara,7, 0,True)
-    x_pos_old = x_cen + rad*math.cos(angOld)
-    y_pos_old = y_cen + rad*math.sin(angOld)
+    x_pos_old = round(x_cen + rad*math.cos(angOld)*2)
+    y_pos_old = round(y_cen + rad*math.sin(angOld))
     screen.move(x_cen,y_cen)
     screen.draw(x_pos_old, y_pos_old, ' ',7, 0,True)
 
@@ -49,7 +48,9 @@ def analogScreen(screen):
     while (screen.has_resized() == False):
         dimData = defineParams(screen)
         drawCircle(screen,dimData[4], dimData[2], dimData[3])
-        drawHand(screen, round(dimData[4]), dimData[2], dimData[3], "second",u'⬥')
+        drawHand(screen, round(dimData[4])-1, dimData[2], dimData[3], "second",u'⬥')
+        drawHand(screen, round(dimData[4])/1.5, dimData[2], dimData[3], "minute",'m')
+        drawHand(screen, round(dimData[4])/2.5, dimData[2], dimData[3], "hour",'h')
         screen.print_at(u'◉',dimData[2],dimData[3])
         screen.refresh()
         sleep(0.1)
