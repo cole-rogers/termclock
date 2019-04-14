@@ -4,6 +4,7 @@ from asciimatics.screen import Screen
 import math
 from time import sleep
 from datetime import datetime as dt
+from sys import exit
 
 def drawCircle(screen, max_circle, x_cen, y_cen):
 #    font_ratio = 2;
@@ -11,9 +12,7 @@ def drawCircle(screen, max_circle, x_cen, y_cen):
         y =math.sin(i*math.pi/180*6)*max_circle+y_cen
         x =math.cos(i*math.pi/180*6)*2*max_circle+x_cen
         screen.print_at(u'◉',round(x),round(y))
- #       ev = screen.get_key()
-  #      if ev in (ord('Q'), ord('q')):
-          #  return
+
 
 def drawHand(screen, rad, x_cen, y_cen, unit, chara):
     if(unit == "second"):
@@ -34,6 +33,12 @@ def drawHand(screen, rad, x_cen, y_cen, unit, chara):
     screen.move(x_cen,y_cen)
     screen.draw(x_pos_old, y_pos_old, ' ',7, 0,False)
 
+def killProgram(screen):
+        ev = screen.get_key()
+        if ev in (ord('Q'), ord('q')):
+             exit(0)
+
+
 def defineParams(screen):
    dimTup = screen.dimensions
    y_cen = round(dimTup[0]/2)
@@ -44,6 +49,7 @@ def defineParams(screen):
        max_radius = round (x_cen*.75/2)
    dimData = (dimTup[0],dimTup[1],x_cen, y_cen, max_radius)
    return dimData
+
 def analogScreen(screen):
     while (screen.has_resized() == False):
         dimData = defineParams(screen)
@@ -55,6 +61,7 @@ def analogScreen(screen):
         screen.print_at("24 Hour Clock",dimData[2]-4,dimData[3]-dimData[4]-1)
         screen.print_at(str(dt.now().time()),dimData[2]-4,dimData[3]+dimData[4]+1)
         screen.refresh()
+        killProgram(screen)
         sleep(0.1)
 
 while True:
