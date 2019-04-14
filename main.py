@@ -52,6 +52,8 @@ def analogScreen(screen):
         drawHand(screen, round(dimData[4])/1.5, dimData[2], dimData[3], "minute",'m')
         drawHand(screen, round(dimData[4])/2.5, dimData[2], dimData[3], "hour",'h')
         screen.print_at(u'◉',dimData[2],dimData[3])
+        screen.print_at("24 Hour Clock",dimData[2]-4,dimData[3]-dimData[4]-1)
+        screen.print_at(str(dt.now().time()),dimData[2]-4,dimData[3]+dimData[4]+1)
         screen.refresh()
         sleep(0.1)
 
