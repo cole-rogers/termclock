@@ -15,15 +15,25 @@ def drawCircle(screen, max_circle, x_cen, y_cen):
   #      if ev in (ord('Q'), ord('q')):
           #  return
 
-def drawHand(screen, length, unit):
-    hype = 0
+def drawHand(screen, rad, x_cen, y_cen, unit, chara):
+    ang = 0
     if(unit == "second"):
-        hype = dt.now().second
+        ang= -dt.now().second/60*360
+        angOld = (-dt.now().second+1)/60*360
     elif (unit == "minute"):
-        hype = dt.now().minute
+        ang = -dt.now().minute/60*360
+        angOld = (-dt.now().minute+1)/60*360
     else:
-        hype = dt.now().hour*12/60
-    
+        ang = -dt.now().hour/24*360
+        angOld = (-dt.now().hour+1)/24*360
+    x_pos = x_cen + rad*math.cos(ang)
+    y_pos = y_cen + rad*math.sin(ang)
+    screen.move(x_cen,y_cen)
+    screen.draw(x_pos, y_pos, chara,7, 0,True)
+    x_pos_old = x_cen + rad*math.cos(angOld)
+    y_pos_old = y_cen + rad*math.sin(angOld)
+    screen.move(x_cen,y_cen)
+    screen.draw(x_pos_old, y_pos_old, ' ',7, 0,True)
 
 def defineParams(screen):
    dimTup = screen.dimensions
@@ -39,9 +49,10 @@ def analogScreen(screen):
     while (screen.has_resized() == False):
         dimData = defineParams(screen)
         drawCircle(screen,dimData[4], dimData[2], dimData[3])
+        drawHand(screen, round(dimData[4]), dimData[2], dimData[3], "second",u'⬥')
         screen.print_at(u'◉',dimData[2],dimData[3])
         screen.refresh()
-        sleep(0.50)
+        sleep(0.1)
 
 while True:
     Screen.wrapper(analogScreen)
