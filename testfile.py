@@ -1,9 +1,15 @@
 from asciimatics.screen import Screen
+from asciimatics.effects import Effect
 from time import sleep
 
 def demo(screen):
-    screen.print_at('Hello world!', 0, 0)
-    screen.refresh()
-    sleep(10)
+    while True:
+        screen.print_at('Hello world!', 0, 0)
+        screen.refresh()
+        if (screen.has_resized() == True): 
+            break;
+        sleep(0.20)
 
-Screen.wrapper(demo)
+
+while True:
+    Screen.wrapper(demo)
