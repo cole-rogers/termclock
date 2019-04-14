@@ -2,20 +2,24 @@ from random import randint
 from asciimatics.screen import Screen
 import math
 from time import sleep
-#def drawCircle():
+def drawCircle(screen, max_circle):
 #    font_ratio = 2;
-#    while True:
-
-        #yplotpoint=sin(r*math.pi/180*6)*circleWide+YMax;
-        #print_at(,x,y);
+    for i in range(1,max_circle):
+        y =math.sin(i*math.pi/180*6)*max_circle+10
+        x =math.sin(i*math.pi/180*6)*max_circle+10
+        
+        screen.print_at("*",round(x),round(y))
  #       ev = screen.get_key()
   #      if ev in (ord('Q'), ord('q')):
           #  return
-     #   screen.refresh()
+    screen.refresh()
+
 def defineParams(screen):
    dimTup = screen.dimensions
-   screen.print_at(str(dimTup),0,0) 
-   screen.refresh()
-   sleep(20)
+   return dimTup
+def mainScreen(screen):
+    dimTup = defineParams(screen)
+    while True:
+        drawCircle(screen,10)
 
-Screen.wrapper(defineParams)
+Screen.wrapper(mainScreen)
