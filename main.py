@@ -24,14 +24,15 @@ def drawHand(screen, rad, x_cen, y_cen, unit, chara):
     else:
         ang = math.radians((dt.now().hour/24*360-90))
         angOld = math.radians((dt.now().hour-1)/24*360-90)
-    x_pos = round(x_cen + rad*math.cos(ang)*2)
-    y_pos = round(y_cen +rad*math.sin(ang))
-    screen.move(x_cen,y_cen)
-    screen.draw(x_pos, y_pos, chara,7, 0,False)
     x_pos_old = round(x_cen + rad*math.cos(angOld)*2)
     y_pos_old = round(y_cen + rad*math.sin(angOld))
     screen.move(x_cen,y_cen)
-    screen.draw(x_pos_old, y_pos_old, ' ',7, 0,False)
+    screen.draw(x_pos_old, y_pos_old, ' ',7, 0,True)
+
+    x_pos = round(x_cen + rad*math.cos(ang)*2)
+    y_pos = round(y_cen +rad*math.sin(ang))
+    screen.move(x_cen,y_cen)
+    screen.draw(x_pos, y_pos, chara,7, 0,True)
 
 def killProgram(screen):
         ev = screen.get_key()
