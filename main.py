@@ -28,11 +28,11 @@ def drawHand(screen, rad, x_cen, y_cen, unit, chara):
     x_pos = round(x_cen + rad*math.cos(ang)*2)
     y_pos = round(y_cen +rad*math.sin(ang))
     screen.move(x_cen,y_cen)
-    screen.draw(x_pos, y_pos, chara,7, 0,True)
+    screen.draw(x_pos, y_pos, chara,7, 0,False)
     x_pos_old = round(x_cen + rad*math.cos(angOld)*2)
     y_pos_old = round(y_cen + rad*math.sin(angOld))
     screen.move(x_cen,y_cen)
-    screen.draw(x_pos_old, y_pos_old, ' ',7, 0,True)
+    screen.draw(x_pos_old, y_pos_old, ' ',7, 0,False)
 
 def defineParams(screen):
    dimTup = screen.dimensions
