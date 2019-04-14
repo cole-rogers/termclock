@@ -23,7 +23,7 @@ def defineParams(screen):
        max_radius = round (x_cen*.75/2)
    dimData = (dimTup[0],dimTup[1],x_cen, y_cen, max_radius)
    return dimData
-def mainScreen(screen):
+def analogScreen(screen):
     dimData = defineParams(screen)
     drawCircle(screen,dimData[4], dimData[2], dimData[3])
     screen.refresh()
@@ -31,4 +31,4 @@ def mainScreen(screen):
     sleep(0.50)
 
 while True:
-    Screen.wrapper(mainScreen)
+    Screen.wrapper(analogScreen)
